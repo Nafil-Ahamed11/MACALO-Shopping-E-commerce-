@@ -61,7 +61,6 @@ const loginVerifiy = async (req,res) =>{
             res.render('home',{message:"login sucsessfuly"});
 
             req.session.admin = adminUsername;
-            console.log('req.session.admin',req.session.admin);
         }else{
            res.render('admin-login',{message:"your password or username incorrect"});
         }
@@ -76,7 +75,6 @@ const customerList = async (req, res) => {
       const db = getDb();
       const collection = db.collection('users');
       const data = await collection.find().toArray();
-      console.log('customers page entering')
       res.render('customers', { data }); 
   } catch (error) {
       console.log(error.message);
@@ -88,11 +86,9 @@ const customerList = async (req, res) => {
 const blockUser = async (req, res) => {
     try {
         const userId = req.params.userId; 
-        console.log("user id ",userId);
         const db = getDb();
         const collection = db.collection('users');
         const ObjectIdUserId = new ObjectId(userId);
-        console.log('user _id ',ObjectIdUserId);
         const user = await collection.findOne( {_id:ObjectIdUserId} );
         if (!user) {
             return res.status(404).send('User not found');
@@ -170,7 +166,6 @@ const editCategory = async (req, res) => {
 const deleteCategorys = async (req, res) => {
   try {
     const categoryId = req.params.id;
-    console.log("categoryID", categoryId);
     await Category.deleteCategory(categoryId);
     res.redirect('/admin/list-Categorys');
   } catch (error) {
@@ -220,9 +215,7 @@ const showBrandList = async (req, res) => {
 const showEditBrand = async (req,res) =>{
   try {
     const brandID = req.params.id;
-    console.log("brand id",brandID);
     const brand = await Brand.getBrandID(brandID);
-    console.log("brand",brand);
     res.render('editbrand',{brand});
   } catch (error) {
     console.log(error.message);
@@ -234,8 +227,6 @@ const editBrands = async (req,res) =>{
   try {
    const brandId = req.params.id;
     const {BrandName}=req.body;
-    console.log("brand name",BrandName)
-    console.log("categoryName");
     await Brand.updateBrand(brandId,BrandName);
     res.redirect('/admin/list-brand');
   } catch (error) {
@@ -246,7 +237,6 @@ const editBrands = async (req,res) =>{
 const deleteBrand = async (req, res) => {
   try {
     const brandID = req.params.id;
-    console.log("categoryID", brandID);
     await Brand.deleteBrand(brandID);
     res.redirect('/admin/list-Brand');
   } catch (error) {
@@ -269,10 +259,7 @@ const productPage = async (req,res) =>{
 
 const fecthSubCategory = async (req, res) => {
   const categoryId = req.params.categoryId;
-  console.log("categoryID", categoryId);
-
   const subcategories = await Category.getSubcategoriesForCategory(categoryId);
-  console.log("expected data",subcategories);
   res.json({ subcategories });
 }
 
@@ -280,7 +267,6 @@ const fecthSubCategory = async (req, res) => {
 const addProducts = async (req, res) => {
   try {
      const body = JSON.parse(JSON.stringify(req.body));
-     console.log("body",body);
 
       let { product, price, description, stock} = body
       const categoryId = body.category;
@@ -372,8 +358,6 @@ const listProductsEditPage = async (req, res) => {
     const product = await Product.getProductID(productID);
     const categories = await Category.getAllCategories();
     const brands = await Brand.getAllbrands();
-    console.log("product",product);
-
     res.render('editProducts', { product, categories, brands });
   } catch (error) {
     console.error(error);
@@ -445,8 +429,6 @@ const editProduct = async (req, res) => {
       delete updatedProduct.categories.subcategories;
     }
 
-    console.log("Product updated: ", updatedProduct);
-
     await Product.updateProduct(productID, updatedProduct);
 
     res.redirect('/admin/list-products');
@@ -458,7 +440,6 @@ const editProduct = async (req, res) => {
 
 const deleteProduct = async (req,res) =>{
   try {
-    console.log("enterd here ")
     const productID = req.params.id;
     await Product.deleteProduct(productID);
     res.redirect('/admin/list-products');
@@ -467,26 +448,6 @@ const deleteProduct = async (req,res) =>{
     
   }
 }
-
-// const addCoupon = async (req, res) => {
-//   try {
-//     let { name, offer, minPurchase, couponType, couponCode, expirationDate, status } = req.body;
-
-
-//     offer = parseInt(offer);
-//     minPurchase = parseInt(minPurchase);
-//     name = name ? name.toUpperCase() : '';
-//     couponType = couponType ? couponType.toUpperCase() : '';
-
-//     const newCoupon = new Coupon(name, offer, minPurchase, couponType, couponCode, expirationDate, status);
-
-//     const insertedId = await newCoupon.save();
-//     console.log('inserted id is: ',insertedId);
-//     res.redirect('/admin/list-coupon');
-//   } catch (error) {
-//     console.log(error.message);
-//   }
-// };
 
 const openAddCouponPage = async (req,res)=>{
   try {
@@ -513,7 +474,6 @@ const addCoupon = async (req, res) => {
     const newCoupon = new Coupon(name, offer, minPurchase, couponType, couponCode, expirationDate, status);
 
     const insertedId = await newCoupon.save();
-    console.log('inserted id is: ', insertedId);
     res.redirect('/admin/list-coupon');
   } catch (error) {
     console.log(error.message);
@@ -528,7 +488,6 @@ const listCoupon = async (req,res)=>{
     try {
       const db = getDb();
       const couponCollection = db.collection('coupon');
-
       const coupons = await couponCollection.find({}).toArray();
       res.render('coupon-list',{coupons});
     } catch (error) {
@@ -554,8 +513,7 @@ const editCoupon = async (req,res)=>{
   try {
     const {name,offer,minPurchase,couponType,expirationDate,couponCode,status}=req.body;
     const couponId = req.params.id;
-    console.log('name',name);
-    console.log('coupon id',couponId);
+
     const updateCoupon ={
       name,
       offer,
@@ -578,15 +536,11 @@ const editCoupon = async (req,res)=>{
 const deleteCoupon = async (req, res) => {
   try {
     const couponId = req.params.id;
-    console.log('coupon id', couponId);
-
     const db = getDb();
     const couponCollection = db.collection('coupon');
 
     const query = { _id: new ObjectId(couponId) }; 
     await couponCollection.deleteOne(query);
-
-    console.log('coupon deleted');
     res.redirect('/admin/list-coupon');
   } catch (error) {
     console.log(error.message);
@@ -617,12 +571,10 @@ const orderList = async (req,res)=>{
 const orderUpdate = async (req,res)=>{
   try {
     const {orderId,newStatus}= req.body;
-    console.log('oid',orderId);
-    console.log('status',newStatus);
     const db = getDb();
     const orderCollection = db.collection('orders');
     const order = await orderCollection.updateOne({_id:new ObjectId(orderId)},{$set:{orderStatus:newStatus}});
-    console.log('order',order);
+
     if(order.modifiedCount===1){
       res.redirect('/admin/list-orders');
     }
@@ -729,11 +681,6 @@ const showLineChart = async (req,res)=>{
       }
     ]).toArray();
     
-   
-
-    console.log('week Sale',weekSales);
-    console.log('week total revenue',weekTotalRevenue);
-    console.log('week coustomers',weekTotalCustomers)
     res.json({weekSales,weekTotalRevenue,weekTotalCustomers});
     
   } catch (error) {
@@ -792,10 +739,7 @@ const weekSalesReport = async (req,res)=>{
       }
   ]).toArray();
 
-  console.log('weeklySalesDate',weeklySalesData);
-
   weeklySalesData.forEach(order => {
-    console.log('Order ID:', order.orderId);
     for (let productId in order.products) {
         console.log('Product ID:', productId);
         console.log('Product:', order.products[productId]);
@@ -808,7 +752,6 @@ const weekSalesReport = async (req,res)=>{
 
     res.download(filePath, 'WeeklySalesReport.xlsx', (err) => {
         if (err) {
-            console.error('Error downloading file:', err);
             res.status(500).send('Error downloading file');
         } else {
             fs.unlinkSync(filePath);
@@ -875,7 +818,6 @@ const monthSalesReport = async (req,res)=>{
     const filePath = await generateSalesReport(monthlySalesData, 'Monthly');
     res.download(filePath, 'MonthlySalesReport.xlsx', (err) => {
         if (err) {
-            console.error('Error downloading file:', err);
             res.status(500).send('Error downloading file');
         } else {
             fs.unlinkSync(filePath);
@@ -943,7 +885,6 @@ const yearSalesReport = async (req,res)=>{
 
     res.download(filePath, 'yearlySalesReport.xlsx', (err) => {
         if (err) {
-            console.error('Error downloading file:', err);
             res.status(500).send('Error downloading file');
         } else {
             fs.unlinkSync(filePath);
@@ -1001,16 +942,10 @@ return filePath;
 
 const showPieChart = async (req, res) => {
   try {
-    console.log('enter pie backend')
     const db = getDb();
     const orderCollection = db.collection('orders');
     const cashOnDeliveryCount = await orderCollection.countDocuments({ paymentMethode: 'cashOnDelivery' });
     const onlineCount = await orderCollection.countDocuments({ paymentMethode: 'online' });
-
-   
-    console.log("Cash on Delivery Count:", cashOnDeliveryCount);
-    console.log("Online Count:", onlineCount);
-
   
     res.status(200).json({ cashOnDeliveryCount, onlineCount });
   } catch (error) {
