@@ -1,0 +1,48 @@
+<%- include('../adminlayout/adminheader.ejs') %>
+<div class="brand-name fs-3 text-center">
+  <a class="navbar-brand fw-bold  ps-2" href="#"><span class="text-primary ">MAC</span><span class="text-primary">ALO</span></a>
+</div>
+<div class="container-fluid mt-2 p-4 d-flex justify-content-center align-items-center flex-column flex-md-row">
+  
+  <div class="card mb-4 mb-md-0" style="width: 22rem; border: none;">
+    <div class="card-body">
+      <h4 class="card-title text-center ">Admin Login</h4>
+      <form action="/admin/login" method="post" >
+        <!-- Email input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example1">User name</label>
+          <input type="text" id="yourUsername" name="username" class="form-control shadow-none "  style="border: 1px solid rgb(187, 180, 180)" required />
+        
+        </div>
+      
+        <!-- Password input -->
+        <div class="form-outline mb-4">
+          <label class="form-label" for="form2Example2">Password</label>
+          <input type="password" id="yourPassword" name="password" class="form-control shadow-none"  style="border: 1px solid rgb(187, 180, 180)" required/>
+        
+        </div>
+      
+        <!-- 2 column grid layout for inline styling -->
+       
+      <div class="d-flex justify-content-center ">
+        <button type="submit" style="font-weight: bold;" class="btn btn-outline-primary mb-4  shadow-none">Login</button>
+      </div>
+      <div class="text-center justify-content-center">
+        <% if (typeof message !== 'undefined') { %>
+          <script>
+            alert("<%= message %>")
+          </script>
+        <% } %>
+      </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+<%- include('../adminlayout/adminfooter.ejs') %>

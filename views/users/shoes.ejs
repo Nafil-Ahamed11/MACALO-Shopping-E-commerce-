@@ -1,0 +1,521 @@
+<%- include('../layouts/header.ejs') %>
+
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<% if(typeof userData !== 'undefined'){ %>
+    <%- include('../users/login-home.ejs')%>
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Shoes shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+<% }else{ %>
+    <%- include('../users/first-home.ejs')%>
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Shoes shop</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% }  %>
+<!-- Offcanvas Menu Begin -->
+
+
+<!-- Header Section End -->
+
+<!-- Breadcrumb Section Begin -->
+
+<!-- Breadcrumb Section End -->
+
+<!-- Shop Section Begin -->
+<section class="shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="shop__sidebar">
+                    <div class="shop__sidebar__search">
+                        <form action="#">
+                            <input type="text" placeholder="Search...">
+                            <button type="submit"><span class="icon_search"></span></button>
+                        </form>
+                    </div>
+                    <div class="shop__sidebar__accordion">
+                        <div class="accordion" id="accordionExample">
+                            <div class="card">
+                                <div class="card-heading">
+                                  <a data-toggle="collapse" data-target="#collapseOne">Categories</a>
+                                </div>
+                                <div id="collapseOne" class="collapse show" data-parent="#accordionExample">
+                                  <div class="card-body">
+                                    <div class="shop__sidebar__categories">
+                                      <ul class="nice-scroll">
+                                        
+                                        <% categories.forEach(category => { %>
+                                          <li>
+                                            <%if(category.name==='shoes'){ %>
+                                            <a data-toggle="collapse" data-target="#<%= category.name %>"><strong><%= category.name %></strong></a>
+                                           
+                                            <div id="<%= category.name %>" class="collapse show" data-parent="#collapseOne">
+                                              <div class="card-body">
+                                                <div class="shop__sidebar__categories">
+                                                  <ul class="nice-scroll"> 
+                                                    <% category.subcategories.forEach(subcategory => { %>
+                                                      <li><a data-subcategory="<%= subcategory %>" class="category" href="#"><%= subcategory %></a></li>
+                                                    <% }) %>
+                                                  </ul>
+                                                </div>
+                                              </div>
+                                            </div>
+                                          </li>
+                                          <% }%>
+                                        <% }) %>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              
+                            
+                              <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseTwo">Branding</a>
+                                </div>
+                                <div id="collapseTwo" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__brand">
+                                            <ul>
+                                                <% brands.forEach(brand => { %>
+                                                <li>
+                                                    <a href="" class="brand" data-target="<%= brand.name %>"><strong><%= brand.name %></strong></a>
+                                                    
+                                                </li>
+                                                <% }) %>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card">
+                                <div class="card-heading">
+                                  <a data-toggle="collapse" data-target="#collapseThree">Filter Price</a>
+                                </div>
+                                <div id="collapseThree" class="collapse show" data-parent="#accordionExample">
+                                  <div class="card-body">
+                                    <div class="shop__sidebar__price">
+                                      <ul id="filer" class="">
+                                        <li><a class="price" href="#" data-min="0" data-max="499">Under 500</a></li>
+                                        <li><a class="price" href="#" data-min="500" data-max="1000">500 - 1000</a></li>
+                                        <li><a class="price" href="#" data-min="1001" data-max="2000">1000 - 2000</a></li>
+                                        <li><a class="price" href="#" data-min="5000" data-max="infinity">Above 5000</a></li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            <div class="card">
+                                <div class="card-heading">
+                                    <a data-toggle="collapse" data-target="#collapseFour">Size</a>
+                                </div>
+                                <div id="collapseFour" class="collapse show" data-parent="#accordionExample">
+                                    <div class="card-body">
+                                        <div class="shop__sidebar__size">
+                                            <label for="US5">US5
+                                                <input name="footSize" value="US5" type="checkbox" id="US5">
+                                            </label>
+                                            <label for="US6">US6
+                                                <input name="footSize" value="US6" type="checkbox" id="US6">
+                                            </label>
+                                            <label for="US7">US7
+                                                <input name="footSize" value="US7" type="checkbox" id="US7">
+                                            </label>
+                                            <label for="US8">US8
+                                                <input name="footSize" value="US8" type="checkbox" id="US8">
+                                            </label>
+                                            <label for="US9">US9
+                                                <input name="footSize" value="US9" type="checkbox" id="US9">
+                                            </label>
+                                            <label for="US10">US10
+                                                <input name="footSize" value="US10" type="checkbox" id="US10">
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                         
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <div class="shop__product__option">
+                    <div class="row">
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__left">
+                                <p>Showing <%= start%>–<%= end %> of <%= totalCount %> results</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 col-md-6 col-sm-6">
+                            <div class="shop__product__option__right">
+                                <p>Sort by Price:</p>
+                                <select name="sortData" id="sortData">
+                                   <option value="Low">Low to high</option>
+                                   <option value="High">high to low</option>
+                                   <option value="L">Latest</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" id="updateProducts">
+                    <input type="hidden" id="Uid" value="<%= userData ? userData : 'null' %>" >
+                    <% paginationData.forEach(product => { %>
+                        <% if (product.category === 'shoes') { %>
+                          <div class="col-lg-4 col-md-6 col-sm-6">
+                            <div class="product__item"data-product-id="<%= product._id %>"> >
+                                <div class="product__item__pic set-bg" style="height: 200px;" data-setbg="<%= product.image?.[0] ? product.image[0].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>">
+                                <ul class="product__hover">
+                                    <li><a class="add-wishlist" href="#" data-product-id="<%= product._id %>"><img src="img/icon/heart.png" alt=""></a></li>
+                                </ul>
+                              </div>
+                              <div class="product__item__text">
+                                <h6 class="fs-5"><%= product.name.toLowerCase() %></h6>
+                                <a href="#" id="product-view" class="add-cart  " data-product-id="<%= product._id %>" >View details</a>
+                                <div class="rating">
+                                  <i class="fa fa-star-o"></i>
+                                  <i class="fa fa-star-o"></i>
+                                  <i class="fa fa-star-o"></i>
+                                  <i class="fa fa-star-o"></i>
+                                  <i class="fa fa-star-o"></i>
+                                </div>
+                                <h5>&#8377;<%= product.price %></h5>
+                                <div class="product__color__select">
+                                  <!-- Add color options or any other product details as needed -->
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        <% } %>
+                      <% }); %>
+                         
+              
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="product__pagination">
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <% if (i === currentPage) { %>
+                        <a class="active" href="javascript:void(0)"><%= i %></a>
+                    <% } else { %>
+                        <a href="/shoes?pages=<%= i %>"><%= i %></a>
+                    <% } %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a class="navbar-brand fw-bold fs-3 ps-2" href="#"><span class="text-white ">MAC</span><span class="text-danger">ALO</span></a>
+                    </div>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
+                    <a href="#"><img src="img/payment.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Clothing Store</a></li>
+                        <li><a href="#">Trending Shoes</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Delivary</a></li>
+                        <li><a href="#">Return & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                <div class="footer__widget">
+                    <h6>NewLetter</h6>
+                    <div class="footer__newslatter">
+                        <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                        <form action="#">
+                            <input type="text" placeholder="Your email">
+                            <button type="submit"><span class="icon_mail_alt"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="footer__copyright__text">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>2020
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js" integrity="sha256-kmHvs0B+OpCW5GVHUNjv9rOmY0IvSIRcf7zGUDTDQM8=" crossorigin="anonymous"></script>
+
+<script>
+    $(document).ready(() => {
+        const selectedCategory = [];
+        const selectedPrices = [];
+        const selectedBrand = [];
+        let selectedSizes = [];
+
+        $('.category').on('click', function () {
+            const subcategory = $(this).data('subcategory');
+            const index = selectedCategory.indexOf(subcategory);
+
+            if (index !== -1) {
+                selectedCategory.splice(index, 1);
+                $(this).css('color', '');
+            } else {
+                selectedCategory.push(subcategory);
+                $(this).css('color', 'red');
+            }
+            sendFilterData();
+            console.log(selectedCategory);
+        });
+
+        $('.price').on('click', function () {
+            const minPrice = $(this).data('min');
+            const maxPrice = $(this).data('max');
+            const index = selectedPrices.findIndex(price => price.min === minPrice && price.max === maxPrice);
+
+            if (index !== -1) {
+                selectedPrices.splice(index, 1);
+                $(this).css('color', '');
+            } else {
+                selectedPrices.push({ min: minPrice, max: maxPrice });
+                $(this).css('color', 'red');
+            }
+            sendFilterData();
+            console.log(selectedPrices);
+        });
+
+        $('.brand').on('click', function (e) {
+            e.preventDefault();
+            const brand = $(this).data('target');
+            const index = selectedBrand.indexOf(brand);
+            if (index !== -1) {
+                selectedBrand.splice(index, 1);
+                $(this).css('color', '');
+            } else {
+                selectedBrand.push(brand);
+                $(this).css('color', 'red');
+            }
+            sendFilterData();
+            console.log(selectedBrand);
+        });
+
+        $('body').on('click', '#product-view', function () {
+        const productId = $(this).data('product-id');
+        console.log('clicked', productId);
+        window.location.href = `/shop-detiels/${productId}`;
+
+        sendFilterData();
+    });
+
+        $('input[name="footSize"]').change(function () {
+            const footSize = $(this).val();
+            const index = selectedSizes.indexOf(footSize);
+
+            if (index !== -1) {
+                selectedSizes.splice(index, 1);
+                var checkbox = $(this);
+                var label = checkbox.parent();
+                label.css({
+                    background: '',
+                    color: '',
+                    borderColor: ''
+                });
+            } else {
+                selectedSizes.push(footSize);
+                var checkbox = $(this);
+                var label = checkbox.parent();
+                label.css({
+                    background: '#111111',
+                    color: '#ffffff',
+                    borderColor: '#111111'
+                });
+            }
+            sendFilterData();
+            console.log(selectedSizes);
+        });
+
+        const sendFilterData = () => {
+            $.ajax({
+                url: "/filterProduct",
+                method: 'post',
+                data: {
+                    category: selectedCategory,
+                    brand: selectedBrand,
+                    price: selectedPrices,
+                    size: selectedSizes,
+                    currentShopPage: 'shoes'
+                },
+                success: function (response) {
+                    if (response.success) {
+                        const productData = response.filterData;
+                        console.log(productData);
+
+                        updateUI(productData);
+                    }
+                }
+            });
+        };
+    });
+
+    
+$('.add-wishlist').on('click', function () {
+            const productID = $(this).data('product-id');
+            const user = $('#Uid').val();
+            
+           
+            console.log('product id', productID);
+            console.log('user id',user);
+
+            $.ajax({
+            url:'/wishlist',
+            method:'post',
+            data:{
+                productID,
+                user,
+               
+            },
+            success:function(response){
+            alert(response.message);
+           
+        }
+     }) 
+        
+ });
+
+
+    function updateUI(products) {
+        const container = $('#updateProducts');
+        container.empty();
+        products.forEach((product) => {
+            container.append(`
+                <div class="col-lg-4 col-md-6 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" style="height: 450px;" data-setbg="${product.image?.[0] ? product.image[0].replace(/\\/g, '/') : 'fallback-image-path.jpg'}">
+                            <ul class="product__hover">
+                                <li><a href="#"><img src="img/icon/heart.png" alt=""></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6>${product.name}</h6>
+                            <a href="#" class="add-cart">+ Add To Cart</a>
+                            <div class="rating">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <h5>${product.price}</h5>
+                            <div class="product__color__select">
+                                <!-- Add color options or any other product details as needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `);
+        });
+
+        setBackgroundImages();
+    }
+
+    function setBackgroundImages() {
+        $('.set-bg').each(function () {
+            var bg = $(this).data('setbg');
+            $(this).css('background-image', 'url(' + bg + ')');
+        });
+    }
+
+
+    // document.addEventListener('DOMContentLoaded', function () {
+    //     const productItems = document.querySelectorAll('.product__item');
+        
+    //     productItems.forEach((item) => {
+    //         item.addEventListener('click', function () {
+    //             const productId = this.dataset.productId;
+    //             console.log('clicked', productId);
+    //             window.location.href = `/shop-detiels/${productId}`;
+    //         });
+    //     });
+    // });
+
+</script>
+
+
+<%- include('../layouts/footer.ejs') %>

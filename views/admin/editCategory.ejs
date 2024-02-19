@@ -1,0 +1,15 @@
+<!-- Admin page to edit a category -->
+<%- include('../adminlayout/adminheader.ejs') %>
+
+<h1>Edit Category</h1>
+<form method="POST" action="/admin/editCategory/<%= category._id %>">
+  <label for="categoryName">Category Name:</label>
+  <input type="text" name="categoryName" value="<%= category.name %>" required>
+  <label for="subcategoryNames">Subcategories (comma-separated):</label>
+  <input type="text" name="subcategoryNames" value="<%= Array.isArray(category.subcategories) ? category.subcategories.join(', ') : '' %>" required>
+  
+  
+  <button type="submit">Save Changes</button>
+</form>
+
+<%- include('../adminlayout/adminfooter.ejs') %>

@@ -1,0 +1,435 @@
+<%- include('../layouts/header.ejs') %>
+
+
+<% if(typeof userData !== 'undefined'){ %>
+   
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/home">Home</a>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+<% }else{ %>
+ 
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Checkout</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% }  %>
+<section class="checkout spad">
+    <div class="container">
+        <div class="checkout__form">
+                <div class="row">
+                    <div class="col-lg-7 col-md-12">
+                        <% if (userAddress && userAddress.length > 0) { %>
+                            <div class="address-list" >
+                                <div class="row">
+                              <h6 class="checkout__title">Saved Addresses</h6>
+                              <div class="previous-address">
+                                <% userAddress.forEach((address) => { %>
+                                    <div class="selecting-address col-12">
+                                  <label>
+                                    <input type="radio" name="selectedAddress" value="<%= String(address._id) %>">
+                                    <%= address.streetAdress %>, <%= address.houseAdress %>, <%= address.twonAdress %>, <%= address.state %>, <%= address.pincode %>, <%= address.country %>
+                                  </label>
+                                </div>
+                                <% }); %>
+                            </div>
+                            </div>
+                             <p class="add-new-address-btn" id="addNewAddressBtn"><span class="material-symbols-outlined">
+                                add
+                                </span>  Add new Address</p>
+                            </div>
+
+                            <div class="add-new-address" id="newAddressFormContainer" style="display: none;">
+                                <form action="/delivery-Address" method="post">
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Name<span>*</span></p>
+                                                <input name="name" type="text">
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Email<span>*</span></p>
+                                                <input value="<%= user %>" disabled name="Email" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Country<span>*</span></p>
+                                        <input name="country" type="text">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>State<span>*</span></p>
+                                        <input name="state" type="text">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Pincode<span>*</span></p>
+                                        <input name="pincode" type="text">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Address<span>*</span></p>
+                                        <input name="streetAdress" type="text" placeholder="Street Address" class="checkout__input__add">
+                                        <input name="houseAdress" type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                                    </div>
+                                    <div class="checkout__input">
+                                        <p>Town/City<span>*</span></p>
+                                        <input name="twonAdress" type="text">
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+                                            <div class="checkout__input">
+                                                <p>Phone<span>*</span></p>
+                                                <input name="phone" type="text">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="site-btn">Update Adress</button>
+                                </form>
+                            </div>
+                            
+                          <% } else { %>
+                          
+                        <h6 class="checkout__title">Billing Details</h6>
+                        <form action="/delivery-Address" method="post">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Name<span>*</span></p>
+                                    <input name="name" type="text">
+                                </div>
+                            </div>
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Email<span>*</span></p>
+                                    <input value="<%= user %>" disabled name="Email" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="checkout__input">
+                            <p>Country<span>*</span></p>
+                            <input name="country" type="text">
+                        </div>
+                        <div class="checkout__input">
+                            <p>State<span>*</span></p>
+                            <input name="state" type="text">
+                        </div>
+                        <div class="checkout__input">
+                            <p>Pincode<span>*</span></p>
+                            <input name="pincode" type="text">
+                        </div>
+                        <div class="checkout__input">
+                            <p>Address<span>*</span></p>
+                            <input name="streetAdress" type="text" placeholder="Street Address" class="checkout__input__add">
+                            <input name="houseAdress" type="text" placeholder="Apartment, suite, unite ect (optinal)">
+                        </div>
+                        <div class="checkout__input">
+                            <p>Town/City<span>*</span></p>
+                            <input name="twonAdress" type="text">
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="checkout__input">
+                                    <p>Phone<span>*</span></p>
+                                    <input name="phone" type="text">
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="site-btn">Update Adress</button>
+                    </form>
+                    <% } %>
+                    </div>
+                    <div class="col-lg-4 col-md-12">
+                        <div class="checkout__order">
+                            <h4 class="order__title">Your order</h4>
+                            <p data-total-items="<%= totalItems %>">Total Items: (<%= totalItems %>)</p>
+                            <p data-sub-total="<%= subTotal %>">Sub Total:&#8377;<%= subTotal %></p>
+                            <p data-coupon-code="<%= couponCode %>">Applied coupon : <%= couponCode %></p>
+                            <ul class="checkout__total__all">
+            
+                                <li>Discount <span><%= discount %></span> </li>
+                                <li>Total Payable <span> <%= total %></span></li>
+                            </ul>
+                           
+                            <p>Lorem ipsum dolor sit amet, consectetur adip elit, sed do eiusmod tempor incididunt
+                            ut labore et dolore magna aliqua.</p>
+                            <div class="checkout__input__radio">
+                                <input type="radio" id="cashOnDelivery" name="paymentMethod" value="cashOnDelivery">
+                                <label for="cashOnDelivery">Cash on Delivery</label>
+                            </div>
+                            
+                            <div class="checkout__input__radio">
+                                <input type="radio" id="online" name="paymentMethod" value="online">
+                                <label for="online">online</label>
+                            </div>
+                            
+                            <button type="button" id="placeOrderBtn" class="site-btn">PLACE ORDER</button>
+                        </div>
+                    </div>
+                </div>
+            
+        </div>
+    </div>
+</section>
+<!-- Checkout Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a class="navbar-brand fw-bold fs-3 ps-2" href="#"><span class="text-white ">MAC</span><span class="text-danger">ALO</span></a>
+                    </div>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
+                    <a href="#"><img src="img/payment.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Clothing Store</a></li>
+                        <li><a href="#">Trending Shoes</a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Delivary</a></li>
+                        <li><a href="#">Return & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                <div class="footer__widget">
+                    <h6>NewLetter</h6>
+                    <div class="footer__newslatter">
+                        <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                        <form action="#">
+                            <input type="text" placeholder="Your email">
+                            <button type="submit"><span class="icon_mail_alt"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="footer__copyright__text">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>2020
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded',function(){
+        const addNewAddressBtn = document.getElementById('addNewAddressBtn');
+        const newAddressFormContainer = document.getElementById('newAddressFormContainer');
+
+        addNewAddressBtn.addEventListener('click',function(){
+        newAddressFormContainer.style.display = newAddressFormContainer.style.display === 'none' ? 'block' : 'none';
+        })
+    })
+</script>
+
+<script>
+    console.log('enter 1')
+    $(document).ready(function () {
+        const placeOrderBtn = $('#placeOrderBtn');
+    
+        // if (placeOrderBtn.length > 0) {
+            console.log('enter 2')
+            placeOrderBtn.on('click', function () {
+                console.log('3')
+                const selectedAddress = $('input[name="selectedAddress"]:checked');
+                const selectedPaymentMethod = $('input[name="paymentMethod"]:checked');
+                            console.log('4')
+                        if (selectedAddress.length > 0 && selectedPaymentMethod.length > 0) {
+                            console.log('enter 5')
+                            
+                        const selectedAddressValue = selectedAddress.val();
+                        const selectedPaymentMethodValue = selectedPaymentMethod.val();
+                        
+                       
+                     
+                        const totalItems = parseFloat($('p[data-total-items]').attr('data-total-items')) || 0;
+                        const subTotal = parseFloat($('p[data-sub-total]').attr('data-sub-total')) || 0;
+                        const couponCode = $('p[data-coupon-code]').attr('data-coupon-code') || '';
+                        const discount = parseFloat($('.checkout__order li:contains("Discount") span').text());
+                        const total = parseFloat($('.checkout__order li:contains("Total Payable") span').text());
+
+                        console.log('frontend',total);
+                        console.log('frontend',discount);
+                        
+                        console.log('eter 6')
+                        const orderData = {
+                            selectedAddress: selectedAddressValue,
+                            totalItems: totalItems,
+                            subTotal: subTotal,
+                            discount: discount,
+                            total: total,
+                            couponCode: couponCode,
+                            paymentMethod: selectedPaymentMethodValue
+                        };
+
+                        console.log('orderData',orderData)
+                        ajaxCall(orderData);
+                  
+                } else {
+                
+                    alert('Please select  address and payment method before placing the order.');
+                }
+            });
+        // }
+    });
+
+
+    function ajaxCall(orderData){
+        $.ajax({
+                        url: '/chekout-details',
+                        type: 'POST',
+                        contentType: 'application/json',
+                        data: JSON.stringify({ orderData: orderData }),
+                        success: function (response) {
+                           console.log('response',response);
+                           if(response.cashOnDelivery){
+                               let oID =  response.orderId;
+                            window.location.href="/order-placed/"+oID
+                            console.log('cash on delivery successfyl')
+                           }else{
+                            const rpOrder = response.rpOrder;
+                            const orderID = response.orderId;
+                            console.log('rp',rpOrder)
+                            initiateRazorpay(rpOrder,orderID);
+                           }
+                        },
+                        error: function (error) {
+                            console.error('Error:', error);
+                        }
+                    });
+    }
+
+
+
+
+function initiateRazorpay(rpOrder,oID) {
+
+var options = {
+    "key": "rzp_test_YAjnmQZvV4VkPW", 
+    "amount": rpOrder.amount, 
+    "currency": "INR",
+    "name": "MACALO",
+    "description": "Test Transaction",
+    "image": "https://example.com/your_logo",
+    "order_id": rpOrder.id || '' ,
+    "handler": function (response){
+        
+        let onlinePaymentSuccess = true;
+        paymentSuccess(oID,onlinePaymentSuccess);
+    },
+    "prefill": {
+        "name": "<%= userCollection.name %>",
+        "email": "<%= userCollection.email %>",
+        "contact": "9000090000"
+    },
+    "notes": {
+        "address": "Razorpay Corporate Office"
+    },
+    "theme": {
+        "color": "#3399cc"
+    }
+};
+var rzp1 = new Razorpay(options);
+rzp1.on('payment.failed', function (response){
+    let onlinePaymentSuccess = false;
+        paymentSuccess(oID,onlinePaymentSuccess);
+});
+
+rzp1.open();
+      
+}
+
+
+function paymentSuccess(oID,paymentStatus){
+    $.ajax({
+        url:'/rpSuccsess',
+        method:'post',
+        data:{
+            orderId:oID,
+            paymentStatus
+        },
+        success: function(response){
+            console.log('respose is ',response);
+            let oID =  response.oID;
+            console.log('2 oid',oID);
+            const isRpaySuccess = response.isRpaySuccess;
+           if(isRpaySuccess === true){
+            window.location.href="/order-placed/"+oID               
+           }
+        }
+
+    })
+}
+
+     
+</script>
+
+    
+<%- include('../layouts/header.ejs') %>

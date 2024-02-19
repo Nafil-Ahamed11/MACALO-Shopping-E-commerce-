@@ -1,0 +1,15 @@
+
+<%- include('../adminlayout/adminheader.ejs') %>
+
+<h1>Edit Brands</h1>
+<form method="POST" action="/admin/editBrand/<%= brand._id %>">
+  <label for="BrandName">Brand:</label>
+  <input type="text" name="BrandName" value="<%= brand.name %>" required>
+ 
+  <button type="submit">Save Changes</button>
+</form>
+
+<%- include('../adminlayout/adminfooter.ejs') %>
+
+
+

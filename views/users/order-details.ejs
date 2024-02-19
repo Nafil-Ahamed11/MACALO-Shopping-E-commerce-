@@ -1,0 +1,151 @@
+<%- include('../layouts/header.ejs') %>
+<% if(typeof userData !== 'undefined'){ %>
+   
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/home">Home</a>
+                            <span>Order Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+<% }else{ %>
+ 
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Order Details</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% }  %>
+
+  <div class="container mb-3">
+    <div class="row">
+       
+            <% products.forEach(product=>{ %>
+
+      
+              <div class="col-lg-4 col-md-6 col-sm-12 mt-4  ">
+                <div class="card m-auto" style="width: 18rem;">
+                  <img class="card-img-top" src="<%=product.image[0] %>" alt="Card image cap">
+                  <div class="card-body">
+                    <% orders.forEach(order=>{ %>
+                        <% var productName = product.name.toLowerCase(); 
+                         var displayProductName = productName.length > 20 ? productName.slice(0,20)+ "..":productName;
+                         %>
+                    <h5 class="card-title fs-6 "><%= displayProductName %></h5>
+                    <span> ( Size: <%= order.orderList[0].size.toLowerCase() %>)</span>
+                    <div class="row">
+                      <div class="col-12">
+                        <p class="card-text">Price: <%= product.price %></p>
+                      </div>
+                      <div class="col-12">
+                        <p>Quantity: <%= order.orderList[0].quantity %></p>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-12">
+                       <p>Status: <%= order.orderStatus %></p>
+                      </div>
+                      <div class="col-12">
+                       <p>Total: <%= order.total %></p>
+   
+                      </div>
+                     </div>
+                    <p>Order Date: <%= new Date(order.orderDate).toLocaleString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></p>
+                    <%
+                    const [day, month, year] = order.deliveryDate.split('/').map(Number);
+                    const deliveryDateObject = new Date(year, month - 1, day);
+                    %>
+                    <p>Delivery Date: <%= deliveryDateObject.toLocaleString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' }) %></p>
+                   
+                  </div>
+                  <%  }) %>
+                </div>
+        </div>
+        <%   })  %> 
+    </div>
+  </div>
+
+
+  <footer class="footer mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a class="navbar-brand fw-bold fs-3 ps-2" href="#"><span class="text-white ">MAC</span><span class="text-danger">ALO</span></a>
+                    </div>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
+                    <a href="#"><img src="img/payment.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Clothing Store</a></li>
+                        <li><a href="#">Trending Shoes</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Delivary</a></li>
+                        <li><a href="#">Return & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                <div class="footer__widget">
+                    <h6>NewLetter</h6>
+                    <div class="footer__newslatter">
+                        <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                        <form action="#">
+                            <input type="text" placeholder="Your email">
+                            <button type="submit"><span class="icon_mail_alt"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="footer__copyright__text">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>2020
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<%- include('../layouts/footer.ejs') %>

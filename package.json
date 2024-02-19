@@ -1,0 +1,38 @@
+{
+  "name": "macaloapp",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^16.3.1",
+    "ejs": "^3.1.9",
+    "exceljs": "^4.4.0",
+    "express": "^4.18.2",
+    "express-session": "^1.17.3",
+    "http-errors": "~1.6.3",
+    "mongodb": "^6.1.0",
+    "morgan": "~1.9.1",
+    "multer": "^1.4.5-lts.1",
+    "nocache": "^4.0.0",
+    "nodemailer": "^6.9.5",
+    "nodemon": "^3.0.1",
+    "otp-generator": "^4.0.1",
+    "pdfkit": "^0.14.0",
+    "pdfkit-table": "^0.1.99",
+    "puppeteer": "^21.9.0",
+    "razorpay": "^2.9.2",
+    "twilio": "^4.18.1"
+  },
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "madge": "^6.1.0"
+  }
+}

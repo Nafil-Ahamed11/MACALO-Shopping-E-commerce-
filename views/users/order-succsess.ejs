@@ -1,0 +1,76 @@
+<%- include('../layouts/header.ejs') %>
+
+<div class="container mt-4 p-3 mb-4">
+  <div class="row d-flex cart justify-content-center ">
+      <div class="col-md-10">
+          <div class="card">
+           
+              <div class="row g-0">
+                  <div class="col-md-6 border-right p-5">
+                      <div class="text-center order-details">
+                          <div class="d-flex justify-content-center mb-5 flex-column align-items-center"> <span class="check1"><i class="fa fa-check"></i></span> <span class="font-weight-bold">Order Confirmed</span> <small class="mt-2">Thank you for shopping with us! </small>
+                         </div> <a href="/order-status" class="btn btn-danger btn-block order-button">Go to your Order</a>
+                          
+                      </div>
+                    
+                  </div>
+                  <div class="col-md-6 background-muted">
+                      <div class="p-3 border-bottom">
+                          <div class="d-flex justify-content-between align-items-center"> <span><i class="fa fa-clock-o text-muted"></i><span class="text-dark font-weight-bold"> Delivery date:</span> <span class="text-success"><%= orderDetails.deliveryDate %></span></span>
+                          </div>
+                          <div class="mt-3  mb-3">
+                            <% products.forEach(product => { %>
+                              <div class="row">
+                                <div class="col-6"> <p class="text-dark font-weight-bold"><%= product.name.toLowerCase() %></p></div>
+                                <div class="col-6"> <p class="text-dark font-weight-bold">&#8377;<%= product.price %></p></div>
+                              </div>
+                           
+                           
+                            <% }) %>
+                          </div>
+                       
+                      </div>
+                      <div class="row g-0 border-bottom">
+                          <div class="col-md-6 border-right">
+                              <div class="p-3 d-flex justify-content-center align-items-center text-dark font-weight-bold"> <span class="text-dark font-weight-bold">Total Iteams</span> </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="p-3 d-flex justify-content-center align-items-center text-dark font-weight-bold"> <span class="text-dark font-weight-bold"><%= orderDetails.totalItems %></span> </div>
+                          </div>
+                      </div>
+                      <div class="row g-0 border-bottom">
+                          <div class="col-md-6">
+                              <div class="p-3 d-flex justify-content-center align-items-center text-dark font-weight-bold"> <span class="text-dark font-weight-bold">Subtotal</span> </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="p-3 d-flex justify-content-center align-items-center"> <span class="text-dark font-weight-bold">&#8377;<%= orderDetails.subTotal %></span> </div>
+                          </div>
+                      </div>
+                      <div class="row g-0 border-bottom">
+                          <div class="col-md-6">
+                              <div class="p-3 d-flex justify-content-center align-items-center"> <span>Discount</span> </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="p-3 d-flex justify-content-center align-items-center"> <span><%= orderDetails.discount %></span> </div>
+                          </div>
+                      </div>
+                      <div class="row g-0">
+                          <div class="col-md-6">
+                              <div class="p-3 d-flex justify-content-center align-items-center"> <span class="font-weight-bold">Total</span> </div>
+                          </div>
+                          <div class="col-md-6">
+                              <div class="p-3 d-flex justify-content-center align-items-center"> <span class="font-weight-bold">&#8377;<%= orderDetails.subTotal %></span> </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+              <div> </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+
+<%- include('../layouts/footer.ejs') %>
+

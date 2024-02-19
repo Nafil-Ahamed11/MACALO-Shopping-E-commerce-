@@ -1,0 +1,211 @@
+<%- include('../layouts/header.ejs') %>
+<style>
+    #proceed-checkout:hover{
+        color: #ffff !important; 
+    }
+    #w-b-hover:hover{
+	color: #fff !important  ;
+}
+</style>
+
+<!-- Offcanvas Menu End -->
+
+<!-- Header Section Begin -->
+<header class="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 col-md-7">
+                    <div class="header__top__left">
+                        <p>Free shipping, 30-day return or refund guarantee.</p>
+                    </div>
+                </div>
+              
+            </div>
+        </div>
+    </div>
+    
+</header>
+
+<section class="breadcrumb-option">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="breadcrumb__text">
+                    <h4>wishlist</h4>
+                    <div class="breadcrumb__links">
+                        <a href="./index.html">Home</a>
+                        <span>wishlist</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Breadcrumb Section End -->
+
+<!-- Shopping Cart Section Begin -->
+<!-- Wishlist Page Template (wishlist.ejs) -->
+<div class="container">
+    <div class="row" id="">
+        <% if(wishlistItems.length === 0){ %>
+
+    
+        <div class=" p-5">
+            <p class="text-danger">Your wishlist is empty</p>
+            <a class="btn btn-dark " href="/home">Continue shoping</a>
+        </div>
+        <%  } %>
+        <input type="hidden" id="Uid" value="<%= userData ? userData : 'null' %>" >
+            <% wishlistItems.forEach(item => { %>
+              <div class="col-lg-4 col-md-6 col-sm-6">
+                <div class="product__item">
+                    <div class="product__item__pic set-bg" style="height: 450px;" data-setbg="<%= item.productDetails[0].image?.[0] ? item.productDetails[0].image[0].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>">
+                        
+                        
+                    <ul class="product__hover">
+                      <li><a class="delete-wishlist" href="#" data-product-id="<%= item.productDetails[0]._id %>"><img style="max-width: 38px;" src="/img/icon/free-delete-2902143-2411575.webp" alt=""></a></li>
+                    </ul>
+                  </div>
+                  <div class="product__item__text">
+                    <%
+                    var productName = item.productDetails[0].name.toLowerCase();
+                    var displayProductName = productName.length > 13 ? productName.slice(0, 13) + "..." : productName;
+                 %>
+                    <h6 class="fs-5"><%= displayProductName %></h6>
+
+                    <a href="#" id="product-view" class="add-cart" data-product-id="<%= item.productDetails[0]._id %>">View details</a>
+
+                    <div class="rating">
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                      <i class="fa fa-star-o"></i>
+                    </div>
+                    <h5>&#8377;<%= item.productDetails[0].price %></h5>
+                    <div class="product__color__select">
+                      <!-- Add color options or any other product details as needed -->
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <% }); %>
+               
+</div>
+</div>
+
+<!-- Shopping Cart Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer mt-2">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a class="navbar-brand fw-bold fs-3 ps-2" href="#"><span class="text-white ">MAC</span><span class="text-danger">ALO</span></a>
+                    </div>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
+                    <a href="#"><img src="img/payment.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Clothing Store</a></li>
+                        <li><a href="#">Trending Shoes</a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Delivary</a></li>
+                        <li><a href="#">Return & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                <div class="footer__widget">
+                    <h6>NewLetter</h6>
+                    <div class="footer__newslatter">
+                        <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                        <form action="#">
+                            <input type="text" placeholder="Your email">
+                            <button type="submit"><span class="icon_mail_alt"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="footer__copyright__text">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>2020
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+   
+        $('body').on('click', '#product-view', function () {
+        const productId = $(this).data('product-id');
+        if(! productId){
+            console.log('no product id')
+        }else{
+        console.log('clicked', productId);
+        window.location.href = `/shop-detiels/${productId}`;
+        }
+    });
+
+
+    $('.delete-wishlist').on('click', function () {
+            const productID = $(this).data('product-id');
+            const user = $('#Uid').val();
+            
+           
+            console.log('product id', productID);
+            console.log('user id',user);
+
+            $.ajax({
+            url:'/delete-wishlist',
+            method:'post',
+            data:{
+                productID,
+                user,
+               
+            },
+            success:function(response){
+
+                if(response.success){
+                    window.location.reload();
+                }
+            
+           
+        }
+     }) 
+        
+ });
+
+
+   
+</script>
+<%- include('../layouts/footer.ejs') %>

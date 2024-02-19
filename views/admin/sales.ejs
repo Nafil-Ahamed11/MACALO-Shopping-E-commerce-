@@ -1,0 +1,51 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  
+<div class="container">
+  <div class="row">
+      <div class="text-center mt-5">
+          <h3 style="font-weight: bold;" id="logo"><span class="text-dark">MAC</span><span class="text-danger">ALO</span></h3>
+      </div>
+      
+      <table class="table table-sm table-dark mt-2">
+          <thead>
+            <tr>
+              <th scope="col">SL.NO</th>
+              <th scope="col">Order Id</th>
+              <th scope="col">Coustomer</th>
+              <th scope="col">Product</th>
+              <th scope="col">Price</th>
+              <th scope="col">Order Date</th>
+              <th scope="col">Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+             <% salesReport.forEach(function(data,i) { %>
+
+              console.log("data",data);
+              <th scope="row"><%= i+1 %></th>
+              <td><%= data._id %></td>
+              <td><%= data.customerName%></td>
+              <td><%= data.productName%></td>
+              <td><%= data.price %></td>
+              <td><%= data.orderDate %></td>
+              <td><%= data.status %></td>
+            </tr>
+            <%  }) %>
+          </tbody>
+        </table>
+      
+  </div>
+</div>
+
+
+</body>
+</html>

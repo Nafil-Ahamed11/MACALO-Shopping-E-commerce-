@@ -1,0 +1,389 @@
+
+<%- include('../layouts/header.ejs') %>
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+<% if(typeof userData !== 'undefined'){ %>
+    <%- include('../users/login-home.ejs')%>
+   
+<% }else{ %>
+    <%- include('../users/first-home.ejs')%>
+<% }  %>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+
+<!-- Header Section End -->
+
+<!-- Shop Details Section Begin -->
+<section class="shop-details">
+    <div class="product__details__pic">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product__details__breadcrumb">
+                        <a href="./index.html">Home</a>
+                        <a href="./shop.html">Shop</a>
+                        <span>Product Details</span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                
+                <div class="col-lg-3 col-md-3">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
+                                <div class="product__thumb__pic set-bg"  data-setbg="<%= product.image && product.image[0] ? product.image[0].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>">
+
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
+                                <div class="product__thumb__pic set-bg"  data-setbg="<%= product.image && product.image[1] ? product.image[1].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>">
+                                </div>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
+                                <div class="product__thumb__pic set-bg"  data-setbg="<%= product.image && product.image[2] ? product.image[2].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>">
+                                </div>
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+                <div class="col-lg-6 col-md-9">
+                    <div class="tab-content">
+                        <div class="tab-pane active" id="tabs-1" role="tabpanel">
+                            <div class="product__details__pic__item">
+                                <img src="<%= product.image?.[0] ? product.image[0].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>" alt="">
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-2" role="tabpanel">
+                            <div class="product__details__pic__item">
+                                <img src="<%= product.image?.[1] ? product.image[1].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>" alt="">
+                            </div>
+                        </div>
+                        <div class="tab-pane" id="tabs-3" role="tabpanel">
+                            <div class="product__details__pic__item">
+                                <img src="<%= product.image?.[2] ? product.image[2].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>" alt="">
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="product__details__content">
+        <div class="container">
+            <div class="row d-flex justify-content-center">
+                <div class="col-lg-8">
+                    <div class="product__details__text">
+                        <input type="hidden" id="Pid" value="<%= product._id %>">
+                        <input type="hidden" id="Uid" value="<%= userID ? userID : 'null' %>" >
+
+                        <h4><%= product.name %></h4>
+                        <div class="rating">
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star"></i>
+                            <i class="fa fa-star-o"></i>
+                            <span> - 5 Reviews</span>
+                        </div>
+                       <h3><%= product.price %> <span></span></h3>
+                        <p><%= product.discription %></p>
+                        <div class="product__details__option">
+                            <div class="product__details__option__size">
+                                <span>Size:</span>
+                                <% Object.entries(product.size).forEach(([size, quantity]) => { %>
+                                    <% if (quantity > 0) { %>
+                                        <label for="<%= size %>"><%= size %>
+                                            <input type="radio" data-size="<%= size %>" id="<%= size %>" name="size">
+                                        </label>
+                                    <% } else { %>
+                                        <label for="<%= size %>" class="disabled"><%= size %>
+                                            <input type="radio" id="<%= size %>" name="size" disabled>
+                                        </label>
+                                    <% } %>
+                                <% }); %>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="product__details__cart__option">
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                            </div>
+                           <button class="primary-btn add-cart ">Add to cart</button>
+                        </div>
+                        <div class="product__details__btns__option">
+                            <a class="add-wishlist" data-product-id="<%= product._id %>" href="#"><i class="fa fa-heart"></i> add to wishlist</a>
+                        </div>
+                        <div class="product__details__last__option">
+                            <h5><span>Guaranteed Safe Checkout</span></h5>
+                            <img src="/img/shop-details/details-payment.png" alt="">
+                            <ul>
+                                <li><span>Categories:</span><%= product.category %></li>
+                                <li><span>product type :</span> <%= product.subCategory %></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+         
+            </div>
+       
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="product__details__tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#tabs-5"
+                                role="tab">Description</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-6" role="tab">Customer
+                                Previews(5)</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#tabs-7" role="tab">Additional
+                                information</a>
+                            </li>
+                        </ul>
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tabs-5" role="tabpanel">
+                              
+                                   
+                                </div>
+                            </div>
+                            
+                                    <div class="product__details__tab__content__item">
+                                        <h5>Material used</h5>
+                                        <p>Polyester is deemed lower quality due to its none natural quality’s. Made
+                                            from synthetic materials, not natural like wool. Polyester suits become
+                                            creased easily and are known for not being breathable. Polyester suits
+                                            tend to have a shine to them compared to wool and cotton suits, this can
+                                            make the suit look cheap. The texture of velvet is luxurious and
+                                            breathable. Velvet is a great choice for dinner party jacket and can be
+                                        worn all year round.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shop Details Section End -->
+
+<!-- Related Section Begin -->
+<section class="related spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h3 class="related-title">Related Products</h3>
+            </div>
+        </div>
+        <div class="row">
+            <input type="hidden" id="Uid" value="<%= userData ? userData : 'null' %>" >
+            <% relatedProducts.forEach(relatedProduct => { %>
+                <div class="col-lg-3 col-md-6 col-sm-6 col-sm-6">
+                    <div class="product__item">
+                        <div class="product__item__pic set-bg" data-setbg="<%= relatedProduct.image?.[0] ? relatedProduct.image[0].replace(/\\/g, '/') : 'fallback-image-path.jpg' %>">
+                            <span class="label">New</span>
+                            <ul class="product__hover">
+                                <li><a class="add-wishlist" data-product-id="<%= relatedProduct._id %>" href="#"><img src="/img/icon/heart.png" alt=""></a></li>
+                            </ul>
+                        </div>
+                        <div class="product__item__text">
+                            <h6><%= relatedProduct.name %></h6>
+                            <a href="#" id="product-view" class="  " data-product-id="<%= relatedProduct._id %>" >View details</a>
+                            <div class="rating">
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                                <i class="fa fa-star-o"></i>
+                            </div>
+                            <h5><%= relatedProduct.price %></h5>
+                            <div class="product__color__select">
+                                <!-- Add color options or any other product details as needed -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</section>
+
+<!-- Related Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a class="navbar-brand fw-bold fs-3 ps-2" href="#"><span class="text-white ">MAC</span><span class="text-danger">ALO</span></a>
+                    </div>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
+                    <a href="#"><img src="/img/payment.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Clothing Store</a></li>
+                        <li><a href="#">Trending Shoes</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Delivary</a></li>
+                        <li><a href="#">Return & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                <div class="footer__widget">
+                    <h6>NewLetter</h6>
+                    <div class="footer__newslatter">
+                        <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                        <form action="#">
+                            <input type="text" placeholder="Your email">
+                            <button type="submit"><span class="icon_mail_alt"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="footer__copyright__text">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>Copyright ©2023
+                           
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+
+
+
+<script>
+    $(document).ready(() => {
+      
+        $('.add-cart').on('click', function () {
+            const productID = $('#Pid').val();
+            const user = $('#Uid').val();
+            
+            const selectedSize = $('.product__details__option__size input[name="size"]:checked');
+
+                if (!selectedSize.length) {
+                    // No size selected, show an alert or take appropriate action
+                    alert('Please select a size before adding to cart');
+                    return;
+                }
+
+            const size = selectedSize.data('size');
+            console.log('size',size);
+            console.log('product id', productID);
+            console.log('user id',user);
+
+            $.ajax({
+            url:'/cartData',
+            method:'post',
+            data:{
+                productID,
+                user,
+                size
+            },
+            success: function(response) {
+           console.log(response.message);
+        if (response.success) {
+            console.log('res count', response.Count);
+            $('#cartCount').text(response.Count); // Update the cart count dynamically
+            alert(response.message);
+        } else {
+            alert(response.message);
+        }
+    }
+     }) 
+        
+ });
+
+});
+
+$('body').on('click', '#product-view', function () {
+        const productId = $(this).data('product-id');
+        console.log('clicked', productId);
+        window.location.href = `/shop-detiels/${productId}`;
+
+        
+    });
+
+    
+$('.add-wishlist').on('click', function () {
+            const productID = $(this).data('product-id');
+            const user = $('#Uid').val();
+            
+           
+            console.log('product id', productID);
+            console.log('user id',user);
+
+            $.ajax({
+            url:'/wishlist',
+            method:'post',
+            data:{
+                productID,
+                user,
+               
+            },
+            success:function(response){
+            alert(response.message);
+           
+        }
+     }) 
+        
+ });
+
+
+</script>
+
+
+
+<%- include('../layouts/footer.ejs') %>
+    

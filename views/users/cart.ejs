@@ -1,0 +1,276 @@
+<%- include('../layouts/header.ejs') %>
+<style>
+    #proceed-checkout:hover{
+        color: #ffff !important; 
+    }
+</style>
+
+<% if(typeof userData !== 'undefined'){ %>
+   
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/home">Home</a>
+                            <span>Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+   
+<% }else{ %>
+ 
+    <section class="breadcrumb-option">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="breadcrumb__text">
+                        <h4>Shop</h4>
+                        <div class="breadcrumb__links">
+                            <a href="/">Home</a>
+                            <span>Cart</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+<% }  %>
+
+<section class="shopping-cart spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="shopping__cart__table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Quantity</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <% if (cartDetails.length === 0) { %>
+                                <tr>
+                                  <td colspan="4">
+                                    <p class="empty-cart-message" style="color: red;">Your cart is empty.</p>
+                                  </td>
+                                </tr>
+                              <% } else { %>
+                            <% cartDetails.forEach(cartItem => { %>
+                            <tr>
+                                <td class="product__cart__item">
+                                    <div class="product__cart__item__pic">
+                                        <% cartItem.productDetails.forEach(productDetail => { %>
+                                            <% if (productDetail.image) { %>
+                                                <img  style="max-width:  100px;" src="<%= productDetail.image[0].replace(/\\/g, '/') %>" alt="">
+                                            <% } else { %>
+                                               console.log('image is undeifned');
+                                            <% } %>
+                                        <% }); %>
+                                    </div>
+                                    <div class="product__cart__item__text">
+                                        <p style="font-weight: bold;color: black;">Size: <%= cartItem.cart.product.size %></p>
+                                        <h6><%= cartItem.productDetails[0].name %></h6>
+                                        <h5>&#8377;<%= cartItem.productDetails[0].price %></h5>
+                                    </div>
+                                </td>
+                                <td class="quantity__item">
+                                    <div class="quantity">
+                                        <div class="pro-qty-2">
+                                            <span class="fa fa-angle-left dec qtybtn" data-PID="<%= cartItem.cart.product.id %>" data-UID="<%= cartItem.email %>" data-size="<%= cartItem.cart.product.size %>" data-action="-1"></span>
+                                            <input type="text" min="1" value="<%= cartItem.cart.product.quantity %>" class="quantity-input">
+                                            <span class="fa fa-angle-right inc qtybtn" data-PID="<%= cartItem.cart.product.id %>" data-UID="<%= cartItem.email %>" data-size="<%= cartItem.cart.product.size %>" data-action="1"></span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td class="cart__price"><%= cartItem.productDetails[0].price * cartItem.cart.product.quantity %></td>
+                                  
+                                <td class="cart__close"> <a href="/remove-cart/<%= cartItem.cart.product.id %>?size=<%= cartItem.cart.product.size %>">
+                                    <i class="fa fa-close"></i>
+                                  </a></td>
+                            </tr>
+                            <% }); %>
+                            <% } %>
+                        </tbody>
+                    </table>
+                </div>
+                <div class="row">
+                    <div class="col-lg-6 col-md-6 col-sm-6">
+                        <div class="continue__btn">
+                            <a href="/home">Continue Shopping</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="cart__discount">
+                    <h6>Apply Coupon</h6><a style="font-style: italic;" class="text-dark" href="/coupon-list" >view coupon </a>
+                    <form action="/applay-coupon" method="post">
+                        <input style="color: black; font-weight: bold;" type="text" name="code" placeholder="Coupon code">
+                        <button type="submit" id="applyCouponBtn" >Apply</button>
+                    </form> 
+                </div>
+                <div class="cart__total">
+                    <h6>Cart total</h6>
+                    <ul>
+                        <li id="subtotal">Subtotal <span><%= cartTotals.subTotal.toFixed(2) %></span></li>
+                        <li id="discount">Discount<span></span></li>
+                        <li id="total">Total<span><%= cartTotals.total.toFixed(2) %></span></li>
+                    </ul>
+                    <a id="proceed-checkout" href="/checkout" class="primary-btn">Proceed to checkout</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Shopping Cart Section End -->
+
+<!-- Footer Section Begin -->
+<footer class="footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-6">
+                <div class="footer__about">
+                    <div class="footer__logo">
+                        <a class="navbar-brand fw-bold fs-3 ps-2" href="#"><span class="text-white ">MAC</span><span class="text-danger">ALO</span></a>
+                    </div>
+                    <p>The customer is at the heart of our unique business model, which includes design.</p>
+                    <a href="#"><img src="img/payment.png" alt=""></a>
+                </div>
+            </div>
+            <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Clothing Store</a></li>
+                        <li><a href="#">Trending Shoes</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="footer__widget">
+                    <h6>Shopping</h6>
+                    <ul>
+                        <li><a href="#">Contact Us</a></li>
+                        <li><a href="#">Payment Methods</a></li>
+                        <li><a href="#">Delivary</a></li>
+                        <li><a href="#">Return & Exchanges</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+                <div class="footer__widget">
+                    <h6>NewLetter</h6>
+                    <div class="footer__newslatter">
+                        <p>Be the first to know about new arrivals, look books, sales & promos!</p>
+                        <form action="#">
+                            <input type="text" placeholder="Your email">
+                            <button type="submit"><span class="icon_mail_alt"></span></button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="footer__copyright__text">
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    <p>Copyright ©
+                        <script>
+                            document.write(new Date().getFullYear());
+                        </script>2020
+                        All rights reserved | This template is made with <i class="fa fa-heart-o"
+                        aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
+                    </p>
+                    <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<!-- Footer Section End -->
+
+<!-- Search Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $('.quantity-input').on('input',function(){
+            const  quantity =   $(this);
+        });
+
+
+        
+    })
+</script>
+
+<script>
+$('form[action="/applay-coupon"]').submit(function (event) {
+  event.preventDefault();
+
+  const code = $(this).find('input[name="code"]').val();
+
+  $.ajax({
+    url: '/applay-coupon',
+    method: 'post',
+    data: { code },
+    success: function (response) {
+        if (response.success) {
+      alert(response.message);
+        $('#discount span').text(response.discount.toFixed(2));
+      $('#total span').text(response.discountedTotal.toFixed(2));
+
+    } else {
+      alert(response.message);
+    }
+  
+    }
+  });
+});
+
+//  document.addEventListener("DOMContentLoaded", function() {
+//         var cartDetails = <%= JSON.stringify(cartDetails) %>; 
+//         var proceedCheckoutBtn = document.getElementById('proceed-checkout');
+
+        
+//         function isCartEmpty() {
+//             return cartDetails.length === 0;
+//         }
+
+       
+//         function toggleCheckoutButton() {
+//             if (isCartEmpty()) {
+//                 proceedCheckoutBtn.style.display = 'none';
+//             } else {
+//                 proceedCheckoutBtn.style.display = 'block';
+//             }
+//         }
+
+     
+//         toggleCheckoutButton();
+
+     
+//     });
+// </script>
+
+
+<%- include('../layouts/footer.ejs') %>

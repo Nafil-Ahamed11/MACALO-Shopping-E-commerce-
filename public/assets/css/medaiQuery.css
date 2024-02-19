@@ -1,0 +1,32 @@
+@media screen and (max-width: 1203px) {
+  .list-product-container {
+    width: 85%;
+  }
+}
+
+@media screen and (max-width: 1199px) {
+  .add-product-container {
+    position: absolute;
+    left: 0;
+    padding: 0;
+  }
+
+  .list-product-container {
+    position: absolute;
+    margin-left: 5%;
+    min-width: 100%;
+    top: 15%;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .list-product-container {
+    
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .list-product-container {
+    top: 10%;
+  }
+}

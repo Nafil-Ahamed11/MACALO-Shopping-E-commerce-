@@ -1,0 +1,27 @@
+<%- include('../layouts/header.ejs') %>
+
+<section class="d-flex justify-content-center align-items-center">
+    <div class="card text-center mt-5" style="width: 300px;">
+        <div class="card-header h5 text-white bg-primary">Password Reset</div>
+        <div class="card-body px-5">
+            <p class="card-text py-2">
+                Please enter your password to reset
+            </p>
+            <form action="/resetpassword" method="post">
+            <div class="form-outline">
+                <label class="form-label"for="password">New password</label>
+                <input type="password" name="password" id="Newpassword" class="form-control my-3" />
+               
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Reset password</button>
+        </form>
+            <div class="d-flex justify-content-between mt-4">
+                <a class="" href="#">Login</a>
+                <a class="" href="#">Register</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<%- include('../layouts/footer.ejs') %>

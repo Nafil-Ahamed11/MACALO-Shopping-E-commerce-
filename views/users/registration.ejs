@@ -1,0 +1,163 @@
+<%- include('../layouts/header.ejs') %>
+<!-- <h3 id="logo"><span class="text-dark">MAC</span><span class="text-danger">ALO</span></h3>
+               -->
+
+
+                <div class="brand-name  text-center">
+                  <a class="navbar-brand fw-bold  ps-2" href="#"><span class="text-dark fs-3 ">MAC</span><span class="text-danger fs-3">ALO</span></a>
+                  <p class="">Join <span class="text-danger">MACALO</span> and unlock a world of <span class="text-danger">men's fashion</span> in just a few clicks.</p>
+                </div>
+                <div class="container-fluid mt-2 p-4 d-flex justify-content-center align-items-center flex-column flex-md-row">
+                  
+                  <div class="card mb-4 mb-md-0" style="width: 22rem; border: none;">
+                    <div class="card-body">
+                      <h4 class="card-title">Sign Up</h4>
+                      <form action="/register" method="post"  onsubmit="return validateLogin(event)">
+                        <!-- Email input -->
+                        <div class="form-outline mb-4">
+                          <input type="text" id="name" name="name" class="form-control shadow-none "  style="border: 1px solid rgb(187, 180, 180)" />
+                          <label class="form-label" for="form2Example1">Enter Name</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="email" id="email" name="email" class="form-control shadow-none "  style="border: 1px solid rgb(187, 180, 180)" />
+                          <label class="form-label" for="form2Example1">Enter Email</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="tel" id="mobile" name="mobile" class="form-control shadow-none "  style="border: 1px solid rgb(187, 180, 180)" />
+                          <label class="form-label" for="form2Example1">Enter Mobile</label>
+                        </div>
+                      
+                      
+                        <!-- Password input -->
+                        <div class="form-outline mb-4">
+                          <input type="password" id="password" name="password" class="form-control shadow-none"  style="border: 1px solid rgb(187, 180, 180)"/>
+                          <label class="form-label" for="form2Example2">Enter Password</label>
+                        </div>
+                        <div class="form-outline mb-4">
+                          <input type="password" id="confirmPassword" name="confirmPassword" class="form-control shadow-none"  style="border: 1px solid rgb(187, 180, 180)"/>
+                          <label class="form-label" for="form2Example2"> Confirm Password</label>
+                        </div>
+                      
+                        <!-- 2 column grid layout for inline styling -->
+                       
+                       
+                      
+                        <!-- Submit button -->
+                        <button type="submit" style="font-weight: bold;" class="btn btn-outline-danger btn-block mb-4  shadow-none">Sign in</button>
+                      
+                        <!-- Register buttons -->
+                        
+                      </form>
+                    </div>
+                  </div>
+                </div>
+                
+
+
+<%
+if (typeof message !== 'undefined') {
+%>
+    <p style="color: green;"><script>alert("<%= message %>")</script></p>
+<%
+}
+%>
+<script>
+  
+    function validateForm(event) {
+   
+      const name = document.getElementById('name').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+      const mobile = document.getElementById('mobile').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      const agreeTerms = document.getElementById('agreeTerms').checked;
+      
+  
+      // Perform validation checks
+      if (name.trim() === '') {
+        alert('Please enter your name');
+        return false; // Return false to prevent form submission
+      }
+
+      if(!isValidName(name)){
+        alert("please enter valid name");
+        return false
+      }
+  
+      if (email.trim() === '') {
+        alert('Please enter your email');
+        return false; // Return false to prevent form submission
+      }
+
+      if (!isValidEmail(email)) {
+        alert('Please enter a valid email address');
+        return false; // Return false to prevent form submission
+      }
+
+      if (mobile.trim() === ''){
+        alert("please enter mobile number");
+        return false;
+      }
+
+       if (!isValidMobile(mobile)) {
+       alert("Enter a valid 10-digit number");
+      return false;
+      }
+  
+      if (password.trim() === '') {
+        alert('Please enter a password');
+        return false; // Return false to prevent form submission
+      }
+
+      const passwordValue = password.value;
+
+      if (!validatePassword(password)) {
+          alert('enter minimum 8 characters');
+         return false;
+      }
+  
+      if (password !== confirmPassword) {
+        alert('Passwords do not match');
+        return false; // Return false to prevent form submission
+      }
+
+      if (!agreeTerms) {
+        alert('Please agree to the terms of service');
+        return false; // Return false to prevent form submission
+      }  
+
+    }
+
+    function validatePassword(password) {;
+    if (password.length < 8) {
+        alert("Password must be at least 8 characters long");
+        return false;
+    }
+    return true; // Password is valid
+}
+
+  
+    function isValidEmail(email) {
+      // Simple email validation regex (you can use a more comprehensive regex)
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidName(name){
+      const nameValid = /^[A-Za-z\s]{4,}\s*$/;
+      return nameValid.test(name);
+    }
+
+    function isValidMobile(mobile) {
+    const mobileValid = /^[0-9]{10}$/;
+    return mobileValid.test(mobile);
+}
+    
+  </script>
+
+
+
+
+  
+
+<%- include('../layouts/footer.ejs') %>

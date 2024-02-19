@@ -1,0 +1,74 @@
+<%- include('../layouts/header.ejs') %>
+
+
+<section class="otp-section">
+<div class="container w-25 h-50 mt-5">
+    <h3>Forget password</h3>
+    <p>Please enter your mobile or email</p>
+
+    <form action="/forgetPass" method="post" id="mobileField" >
+        <div class="form-group" >
+           
+            <label for="mobile">mobile</label>
+            <input type="tel" id="mobile" name="mobile" class="form-control shadow-none" required style="border: 1px solid rgb(187, 180, 180)">
+        </div>
+       
+        <div class="form-group">
+            <button type="submit"  class="btn  btn-outline-danger btn-sm  btn-block " >Verify OTP</button>
+        </div>
+    </form>
+    <form action="/forgetPass" method="post" id="emailField" >
+        <div class="form-group" >
+           
+            <label for="Email">Email</label>
+            <input type="email" id="email" name="email" class="form-control shadow-none"required style="border: 1px solid rgb(187, 180, 180)">
+        </div>
+       
+        <div class="form-group">
+            <button type="submit"  class="btn  btn-outline-danger btn-sm  btn-block " >Verify OTP</button>
+        </div>
+    </form>
+
+    <!-- Display Error Message -->
+    <% if (typeof message !== 'undefined') { %>
+        <p style="color: red;"><%= message %></p>
+    <% } %>
+
+    <!-- Add a link to resend OTP if needed -->
+    <!-- <p>Didn't receive the OTP? <a href="/resend-otp">Resend OTP</a></p> -->
+
+    <div class="form-group">
+        <input type="radio" name="deliveryMethod" value="email"> Email
+        <input type="radio" name="deliveryMethod" value="mobile"> Mobile
+    </div>
+    
+   
+</div>
+
+</section>
+
+<script>
+     document.addEventListener("DOMContentLoaded", function () {
+            var emailField = document.getElementById("emailField");
+            var mobileField = document.getElementById("mobileField");
+            var emailRadio = document.querySelector('input[value="email"]');
+            var mobileRadio = document.querySelector('input[value="mobile"]');
+
+            emailRadio.addEventListener("change", function () {
+                if (emailRadio.checked) {
+                    emailField.style.display = "block";
+                    mobileField.style.display = "none";
+                }
+            });
+
+            mobileRadio.addEventListener("change", function () {
+                if (mobileRadio.checked) {
+                    emailField.style.display = "none";
+                    mobileField.style.display = "block";
+                }
+            });
+        });
+    </script>
+
+
+<%- include('../layouts/footer.ejs') %>
