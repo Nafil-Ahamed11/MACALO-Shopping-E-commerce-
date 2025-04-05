@@ -1,5 +1,12 @@
 # MACALO E-commerce Project Documentation
 
+![Screenshot (160)](https://github.com/user-attachments/assets/a8692571-9bb3-4b64-8c69-23521dd9b5dc)
+
+![Screenshot (161)](https://github.com/user-attachments/assets/23b5ccd9-3cec-40d1-a70b-a79c836cba10)
+
+![Screenshot (167)](https://github.com/user-attachments/assets/4fa59bff-b17b-494f-a2bc-97a9981c5b6c)
+
+
 ## Overview
 
 MACALO E-commerce is a comprehensive e-commerce platform developed using Node.js and MongoDB. It aims to provide a seamless shopping experience for users while offering powerful management tools for administrators. The project encompasses various features for both administrators and users, ensuring efficient product management, secure transactions, and a user-friendly interface.
